@@ -1,4 +1,4 @@
-import { defaults, type State } from './core';
+import { defaults, type Question, type State } from './core';
 import { seed } from './data';
 
 let database: Promise<IDBDatabase> | undefined;
@@ -17,7 +17,16 @@ export async function read(): Promise<State> {
   const db = await openDatabase();
   return new Promise((resolve, reject) => {
     const request = db.transaction('state').objectStore('state').get('main');
-    request.onsuccess = () => resolve(request.result ?? { questions: seed(), settings: structuredClone(defaults), active: null, history: [] });
+    request.onsuccess = () => {
+      const stored = request.result as State | undefined;
+      if (!stored) { resolve({ questions: seed(), settings: structuredClone(defaults), active: null, history: [] }); return; }
+      const addTriangle = (question: Question): Question => question.type === 'transfer' && !question.targets.includes('triangle') ? { ...question, targets: [...question.targets, 'triangle'] } : question;
+      resolve({
+        ...stored,
+        questions: stored.questions.map(addTriangle),
+        active: stored.active ? { ...stored.active, questions: stored.active.questions.map(addTriangle) } : null,
+      });
+    };
     request.onerror = () => reject(request.error);
   });
 }

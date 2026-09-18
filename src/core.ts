@@ -1,7 +1,7 @@
 export type Level = 1 | 2 | 3 | 4;
 export type Difficulty = '基礎' | '一般' | '挑戰';
 export type QuestionType = 'single' | 'transfer' | 'multiple';
-export type ContainerKind = 'cup' | 'tall' | 'bowl' | 'bottle';
+export type ContainerKind = 'cup' | 'tall' | 'bowl' | 'bottle' | 'triangle';
 
 export type Option = { id: string; text: string };
 
@@ -85,7 +85,8 @@ export const containerNames: Record<ContainerKind, string> = {
   cup: '一般透明杯',
   tall: '高瘦透明杯',
   bowl: '寬矮碗',
-  bottle: '細長透明瓶',
+  bottle: '細長試管',
+  triangle: '三角容器',
 };
 
 export function shuffle<T>(items: T[]): T[] {
