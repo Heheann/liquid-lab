@@ -2,6 +2,8 @@
 
 給國中特教班與資源班使用的互動自然科教材，適合 Windows 電腦、Chrome／Edge 與大型觸控電子白板。
 
+公開網站：https://heheann.github.io/liquid-lab/
+
 ## 內容
 
 - 4 個研究關卡，內建完整 30 題題庫：Level 1：8 題、Level 2：8 題、Level 3：7 題、Level 4：7 題。
